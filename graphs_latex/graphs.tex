@@ -1,0 +1,30 @@
+\documentclass{article}
+\usepackage{pgfplots}
+\usepackage{filecontents}
+
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}
+\addplot table [x=b, y=a, col sep=comma] {../terms/terms1.csv};
+\end{axis}
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\begin{axis}
+\addplot table [x=b, y=a, col sep=comma] {../terms/terms2.csv};
+\end{axis}
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\begin{axis}
+\addplot table [x=b, y=a, col sep=comma] {../terms/terms3.csv};
+\end{axis}
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\begin{axis}
+\addplot table [x=b, y=a, col sep=comma] {../terms/terms4.csv};
+\end{axis}
+\end{tikzpicture}
+\end{document}
