@@ -8,10 +8,10 @@
 int main(){
     
     int n=20;
-    double p0[2]={0.50,0.75};
-    double k[2]={1.5,2.5};
-    char out[256] ="C:\\Users\\Poe\\Desktop\\logistic_sequences\\terms\\terms";
-    char outNr[100][2]={"1","2","3","4"};
+    double p0[2]={0.50,};
+    double k[3]={3.1,3.2,3.3};
+    char out[256] ="C:\\Users\\Iulian\\Desktop\\logistic_sequences\\terms\\terms";
+    char outNr[100][2]={"7", "8", "9"};
 
     int h=0;
     double p;
@@ -31,7 +31,7 @@ int main(){
                 fout<<p * 10000  <<","<<j<<"\n";
                 j+=0.5;
             }
-            strcpy(out,"C:\\Users\\Poe\\Desktop\\labsUVT\\cdi\\terms");
+            strcpy(out,"C:\\Users\\Iulian\\Desktop\\logistic_sequences\\terms\\terms");
             fout.close();h++;
         }
     }

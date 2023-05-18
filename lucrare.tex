@@ -1,6 +1,10 @@
 \documentclass[a4paper,12pt]{article}
 
 \usepackage[romanian]{babel}
+\usepackage{listings}
+\usepackage{pgfplots}
+\usepackage{filecontents}
+\usepackage{caption}
 
 \title{\bf Secvențe logistice}
 
@@ -13,11 +17,186 @@
 \maketitle
 
 \begin{abstract}
-O secvență care apare în ecologie ca un model pentru creșterea populației este definită de ecuația diferențială $p_n+1 = kp_n(1-p_n)$ unde $p_n$ măsoară mărimea populației $n$ a unei singure specii, astfel $0<=p_n<=1$. Acestea fiind zise, un ecologist ar fii interesat să prezică mărimea populației în raport cu trecerea timpului, astfel își pune anumite întrebări: Se va stabiliza mărimea populației la o anumită limită? Se va modifica într-o manieră circulară? Sau va da dovadă de un comportament total aleatoriu? La toate aceste întrebări vom încerca să răspundem în paginile care urmează, analizând seturi de date prezentate sub forma unor grafice.
+Folosindu-ne de ecuația diferențială $p_n+1 = kp_n(1-p_n)$ calculăm terminii unei secvențe ca mai apoi să îi introducem într-un graf care la rândul său urmează a fi analizat. Lucrarea conține patru enunțuri și patru concluzii, respectiv răspunsuri.
 \end{abstract}
 
 \section{Introducere}
+O secvență care apare în ecologie ca un model pentru creșterea populației este definită de ecuația diferențială $p_n+1 = kp_n(1-p_n)$ unde $p_n$ măsoară mărimea populației $n$ a unei singure specii, astfel $0<=p_n<=1$. Acestea fiind zise, un ecologist ar fii interesat să prezică mărimea populației în raport cu trecerea timpului, punându-și anumite întrebări: Se va stabiliza mărimea populației la o anumită limită? Se va modifica într-o manieră circulară? Sau va da dovadă de un comportament total aleatoriu? Pentru experiment și analiza datelor vom folosi un model discret, cu secvențe în loc de limite, deoarece este mai preferabil pentru modelarea populațiilor a căror natalitate și mortalitate variază în mod regulat.
+
+Experimentul, respectiv conținutul lucrării, este împărțit în patru enunțuri ce vor fi prezentate și rezolvate comform cerinței. Fiecare enunț se bazează pe variația termenilor secvenței, variația ce o vom observa punând datele descoperite în grafuri și analizând aceste grafuri pentru a răspunde la întrebările primite în enunțuri.
+
+
+
+\section{Circumstanțe}
+
+Din punct de vedere tehnic, experimentul se folosește de un program executabil scris în limbajul de programare C++. Programul calculează termenii secvenței în funcție de anumite variabile ($p_0$ și $k$), termeni pe care îi scrie în fișiere CSV. Practic, pentru fiecare secvență în parte avem un fișier CSV care conține termenii secvenței. După ce secvențele au fost calculate și fișiere CSV au fost create le putem afișa sub forma unor grafuri în Latex folosindu-ne de librăria $pgfplots$.
+
+
+\begin{lstlisting}[language=C++, caption=Program C++]
+#include<iostream>
+#include<fstream>
+#include<string.h>
+
+int main(){
+
+  int n=<NUMBER OF TERMS>;
+  double p0[2]={<TERM p0 OF EVERY SEQUENCE>};
+  double k[2]={<THE k OF EVERY SEQUENCE>};
+  char out[256] ="<ABSOLUTE PATH TO THE FOLDER>\\terms";
+  char outNr[100][2]={<THE NUMBER OF THE DATA TERM ex: "1">};
+
+  int h=0;
+  double p;
+  double j = 0.5;
+  int sizeOfp0 = sizeof(p0)/sizeof(double );
+  int sizeOfk = sizeof(k)/sizeof(double);
+
+  for(int x=0;x<sizeOfp0;x++){
+    for(int y=0;y<sizeOfk;y++){
+      p = p0[x];
+      strcat(out,outNr[h]);
+      strcat(out,".csv");
+      std::ofstream fout(out);
+      fout<<"a,b\n";
+      for(int i=1;i<=n;i++){
+        p = k[y] * p * (1-p);
+        fout<<p * 10000  <<","<<j<<"\n";
+        j+=0.5;
+      }
+      strcpy(out,"<ABSOLUTE PATH TO THE FOLDER>\\terms");
+      fout.close();h++;
+   }}
+ }
+
+\end{lstlisting}
+
+\begin{lstlisting}[caption = Bloc cod Latex]
+\begin{tikzpicture}
+\begin{axis}
+\addplot table [x=b, y=a, col sep=comma] {<FILE NAME>};
+\end{axis}
+\end{tikzpicture}
+\end{lstlisting}
+
+
+
+\section{Experiment}
+În această secțiune vom rezolva enunțurile specificate anterior:
+
+\textit{\textbf{Enunț 1}} :  Să se calculeze 20 sau 30 de termeni ai secvenței pentru $p_0=\frac{1}{2}$ și pentru două valori ale lui k astfel încât $1<k<3$. Să se facă grafice cu fiecare secvență. Par secvențe a converge? Să se repete experimentul cu o valorare diferită a lui $p_0$, $0<p_0<1$. Depinde limita de alegerea lui $p_0$? Depinde de alegerea lui $k$?
+
+Pe baza graficelor prezentate mai jos putem spune că fiecare secvență în parte pare să conveargă, atât pentru $k$ diferit cât pentru $p_0$ diferit. În Figura 1 pare că graficul pornește de la o valoare mai mare și converge spre o valoare mai mică, în Figura 2 pare că graficul pornește aleatoriu ca mai apoi să conveargă, iar în Figura 3, când ambele valori par a fi mijlocul intervalului de definire, graficul pare constant. Deasmenea, putem observa în primele trei figuri că, cu cât $k$ este mai mare cu atât graficul vrea să urce mai sus, deci limita este influențată de $k$ în cazul în care $p_0$ este $\frac{1}{2}$. În figurile 4,5 și 6 observăm că o dată cu creșterea lui $p_0$ de la $0.5$ la $0.75$ graful nu pare să mai coboare, ca mai apoi să conveargă, ci pare să pornească de la o valoare mai mică și să urce. În cazul figurii 5 pare să urce, să aibă un comportament aleatoriu și mai apoi să devină constant.
+
+Pentru a conlcluziona răspunsul, secvențele par să conveargă în toate cazurile prezentate, alegerile valorilor pentr $k$, respectiv $p_0$ influențeză orientarea grafului, iar dacă luăm valori ce reprezintă mijlocul intervalului atunci graful nu pare să crească sau să descrească, acesta fiin constant.
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}
+\addplot table [x=b, y=a, col sep=comma] {./terms/terms1.csv};
+\end{axis}
+\end{tikzpicture}
+\caption{$p_0 = \frac{1}{2}$ și $k=1.5$}
+\end{figure}
+
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}
+\addplot table [x=b, y=a, col sep=comma] {./terms/terms2.csv};
+\end{axis}
+\end{tikzpicture}
+\caption{$p_0 = \frac{1}{2}$ și $k=2.5$}
+\end{figure}
+
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}
+\addplot table [x=b, y=a, col sep=comma] {./terms/terms3.csv};
+\end{axis}
+\end{tikzpicture}
+\caption{$p_0 = \frac{1}{2}$ și $k=2$}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}
+\addplot table [x=b, y=a, col sep=comma] {./terms/terms4.csv};
+\end{axis}
+\end{tikzpicture}
+\caption{$p_0 = 0.75$ și $k=1.5$}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}
+\addplot table [x=b, y=a, col sep=comma] {./terms/terms5.csv};
+\end{axis}
+\end{tikzpicture}
+\caption{$p_0 = 0.75$ și $k=2.5$}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{axis}
+\addplot table [x=b, y=a, col sep=comma] {./terms/terms6.csv};
+\end{axis}
+\end{tikzpicture}
+\caption{$p_0 = 0.75$ și $k=2$}
+\end{figure}
+
+\pagebreak
+
+\textit{\textbf{Enunț 2}} : Să se calculeze termeni ai secvenței pentru $3 < k <3.4$. Ce se poate observa referitor la comportamentul termenilor?
+
+Comparativ cu enunțul anterior, unde secvențele părau a converge, aici putem observa o fluctuație a graficelor. Secvențele nu par să tindo spre o limită, avestea artând exact contrariul. Observăm totuși că secvențele nu prezintă un comportament aleatoriu, terminii fluctuând într-un anumit interval, exemplu Figura 7 în care termenii par să fluctueze în intervalul [5000,8000] (reprezentarea pe grafic).
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\begin{axis}
+\addplot table [x=b, y=a, col sep=comma] {./terms/terms7.csv};
+\end{axis}
+\end{tikzpicture}
+\caption{$p_0 = 0.5$ și $k=3.1$}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\begin{axis}
+\addplot table [x=b, y=a, col sep=comma] {./terms/terms8.csv};
+\end{axis}
+\end{tikzpicture}
+\caption{$p_0 = 0.5$ și $k=3.2$}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\begin{axis}
+\addplot table [x=b, y=a, col sep=comma] {./terms/terms9.csv};
+\end{axis}
+\end{tikzpicture}
+\caption{$p_0 = 0.5$ și $k=3.3$}
+\end{figure}
 
 
 
 \end{document}
+
+
+
+
+
+
+
+
+
+

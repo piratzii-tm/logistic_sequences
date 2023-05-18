@@ -1,0 +1,3 @@
+"C:\Program Files\JetBrains\CLion 2023.1\bin\cmake\win\x64\bin\cmake.exe" -E rm -f CMakeFiles\cdi.dir/objects.a
+C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\ar.exe qc CMakeFiles\cdi.dir/objects.a @CMakeFiles\cdi.dir\objects1
+C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE -g -Wl,--whole-archive CMakeFiles\cdi.dir/objects.a -Wl,--no-whole-archive -o cdi.exe -Wl,--out-implib,libcdi.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\cdi.dir\linkLibs.rsp
