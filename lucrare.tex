@@ -188,6 +188,122 @@ Comparativ cu enunțul anterior, unde secvențele părau a converge, aici putem 
 \end{figure}
 
 
+\textit{\textbf{\\Enunț 3}} : Experimentați cu valori ale lui k între $3.4$ și $3.5$. Ce se întâmplă cu termenii?
+
+
+Observăm că termenii (dimensiunea populației) se uniformizează spre o populație de mărime medie, pe măsură ce generațiile trec. Cu toate acestea, viteza de uniformizare și valoarea limită la care se stabilizează pot varia în funcție de valoarea lui "k". Cu cât valoarea lui "k" este mai mare, cu atât procesul este accelerat și se apropie de uniformizare mai repede.
+
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\begin{axis}
+\addplot table [x=b, y=a, col sep=comma] {./terms/terms10.csv};
+\end{axis}
+\end{tikzpicture}
+\caption{$p_0 = 0.5$ și $k=3.41$}
+\end{figure}
+
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\begin{axis}
+\addplot table [x=b, y=a, col sep=comma] {./terms/terms11.csv};
+\end{axis}
+\end{tikzpicture}
+\caption{$p_0 = 0.5$ și $k=3.45$}
+\end{figure}
+
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\begin{axis}
+\addplot table [x=b, y=a, col sep=comma] {./terms/terms12.csv};
+\end{axis}
+\end{tikzpicture}
+\caption{$p_0 = 0.5$ și $k=3.49$}
+\end{figure}
+
+
+\textit{\textbf{\\\\\\\\Enunț 4}} : Pentru valorile lui k între $3.6$ și 4, calculați și reprezentați cel puțin 100 de termeni și comentați comportamentul secvenței. Ce se întâmplă dacă modificați $p_0$ cu $0.001$? Acest tip de comportament este numită haotică și este expusă de populațiile de insecte în anumite condiții.
+
+
+Pentru valori mici ale lui k, populația va crește treptat până la o valoare limită stabilă. Aceasta înseamnă că populația va atinge o valoare maximă și se va menține în jurul acestei valori.\\
+Pe măsură ce valoarea lui k crește, populația poate prezenta oscilații ciclice în jurul valorii limită sau poate avea o variație aleatoare. Aceasta depinde de condițiile inițiale și de sensibilitatea la condițiile inițiale a ecuației.\\
+În cazul în care valorile lui k depășesc anumite limite critice, comportamentul populației poate deveni haotic, ceea ce înseamnă că devine extrem de sensibil la condițiile inițiale și prezintă fluctuații aparent imprevizibile.).\\
+Dacă modificăm valoarea inițială $p_0$ cu o valoare mică, cum ar fi $0.001$, comportamentul secvenței poate deveni haotic (spre exemplu Figura 16), în special în cazul valorilor mari ale lui k.\\
+
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\begin{axis}
+\addplot table [x=b, y=a, col sep=comma] {./terms/terms13.csv};
+\end{axis}
+\end{tikzpicture}
+\caption{$p_0 = 0.5$ și $k=3.7$}
+\end{figure}
+
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\begin{axis}
+\addplot table [x=b, y=a, col sep=comma] {./terms/terms14.csv};
+\end{axis}
+\end{tikzpicture}
+\caption{$p_0 = 0.5$ și $k=3.8$}
+\end{figure}
+
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\begin{axis}
+\addplot table [x=b, y=a, col sep=comma] {./terms/terms15.csv};
+\end{axis}
+\end{tikzpicture}
+\caption{$p_0 = 0.5$ și $k=3.9$}
+\end{figure}
+
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\begin{axis}
+\addplot table [x=b, y=a, col sep=comma] {./terms/terms16.csv};
+\end{axis}
+\end{tikzpicture}
+\caption{$p_0 = 0.001$ și $k=3.7$}
+\end{figure}
+
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\begin{axis}
+\addplot table [x=b, y=a, col sep=comma] {./terms/terms17.csv};
+\end{axis}
+\end{tikzpicture}
+\caption{$p_0 = 0.001$ și $k=3.8$}
+\end{figure}
+
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\begin{axis}
+\addplot table [x=b, y=a, col sep=comma] {./terms/terms18.csv};
+\end{axis}
+\end{tikzpicture}
+\caption{$p_0 = 0.001$ și $k=3.9$}
+\end{figure}
+
+
+\section{Concluzie}
+În concluzie, comportamentul secvenței în ecuația diferențelor logistică poate varia în funcție de valorile lui k și de condițiile inițiale. De la creștere stabilă la oscilații ciclice și comportament haotic, acest model poate reprezenta diferite tipuri de populații în funcție de parametrii specifici ai sistemului.
 
 \end{document}
 
